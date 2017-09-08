@@ -3,7 +3,6 @@ package me.masehitam.prototypechatrainbow;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ale.listener.SigninResponseListener;
@@ -12,7 +11,6 @@ import com.ale.rainbowsdk.RainbowSdk;
 
 public class MainActivity extends AppCompatActivity implements ChatFeedFragment.OnListFragmentInteractionListener {
 
-    private FrameLayout frameContainer;
     private AppCompatActivity mActivity;
 
     String email = "farianti@mailinator.com";
@@ -23,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements ChatFeedFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mActivity = this;
-
-        frameContainer = (FrameLayout) findViewById(R.id.frame_container);
 
         RainbowSdk.instance().connection().start(new StartResponseListener() {
             @Override
@@ -71,12 +67,21 @@ public class MainActivity extends AppCompatActivity implements ChatFeedFragment.
             }
         });
 
-        // Create fragment and give it an argument specifying the article it should show
+        /*// Create fragment and give it an argument specifying the article it should show
         ChatFeedFragment newFragment = new ChatFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack so the user can navigate back
         transaction.replace(R.id.frame_container, newFragment);
+        transaction.addToBackStack(null);
+        // Commit the transaction
+        transaction.commit();*/
+        // Create fragment and give it an argument specifying the article it should show
+        MainFragment mainFragment = new MainFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
+        transaction.replace(R.id.frame_container, mainFragment);
         transaction.addToBackStack(null);
         // Commit the transaction
         transaction.commit();
